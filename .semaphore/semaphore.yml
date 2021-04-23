@@ -12,26 +12,23 @@ auto_cancel:
     when: "branch =~ 'production'"
 
 blocks:
-  - name: Deploy
-    auto_cancel:
-      queued:
-        when: "branch =~ 'production'"
+  - name: Deploy Production
     run:
       when: "branch =~ 'production'"
     task:
       jobs:
-        - name: Alert about starting deployment
+        - name: Deploy production
           commands:
-            - echo 'Alerting about starting deployment (Slack)'
+            - echo 'Deploying production'
+  - name: Deploy Staging
+    run:
+      when: "branch =~ 'production'"
+    task:
+      jobs:
+        - name: Deploy staging
+          commands:
+            - echo 'Deploying staging'
 
 promotions:
-  - name: Staging deploy
-    pipeline_file: deploy.yml
-    auto_promote:
-      when: "result = 'passed'"
-  - name: Production deploy
-    pipeline_file: deploy.yml
-    auto_promote:
-      when: "result = 'passed'"
   - name: Demo deploy
     pipeline_file: deploy.yml
