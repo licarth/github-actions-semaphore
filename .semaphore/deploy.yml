@@ -1,0 +1,22 @@
+version: v1.0
+
+name: Deployment
+
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+  containers:
+    - name: main
+      image: 'eu.gcr.io/inato-gcr-public/ci:latest'
+
+blocks:
+  - name: Deploy to k8s block
+    run:
+      when: "branch =~ 'production'"
+    task:
+      jobs:
+        - name: Deploy to k8s job
+          commands:
+            - checkout
+            - myke deploy

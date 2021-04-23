@@ -6,21 +6,29 @@ agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu1804
-  containers:
-    - name: main
-      image: 'eu.gcr.io/inato-gcr-public/ci:latest'
 
 auto_cancel:
   queued:
     when: "branch =~ 'production'"
 
 blocks:
-  - name: Deploy to k8s block
+  - name: Deploy
     run:
       when: "branch =~ 'production'"
     task:
       jobs:
-        - name: Deploy to k8s job
+        - name: Alert about starting deployment
           commands:
-            - checkout
-            - myke deploy
+            - echo 'Alerting about starting deployment (Slack)'
+
+promotions:
+  - name: Staging deploy
+    pipeline_file: deploy.yml
+    auto_promote:
+      when: "result = 'passed'"
+  - name: Production deploy
+    pipeline_file: deploy.yml
+    auto_promote:
+      when: "result = 'passed'"
+  - name: Demo deploy
+    pipeline_file: deploy.yml
