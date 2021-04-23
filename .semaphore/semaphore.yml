@@ -1,0 +1,24 @@
+version: v1.0
+
+name: Deployment
+
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+
+auto_cancel:
+  queued:
+    when: "branch = 'main' and tag =~ '^deployment'"
+
+blocks:
+  - name: Deploy to k8s block
+    run:
+     when: "branch = 'main' and tag =~ '^deployment'"
+    task:
+      jobs:
+        - name: Deploy to k8s job
+          commands:
+            - echo "Deploying to k8s..."
+            - sleep 5
+            - echo "Deployed."
