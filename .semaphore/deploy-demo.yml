@@ -12,8 +12,6 @@ agent:
 
 blocks:
   - name: Deploy to demo
-    run:
-      when: "branch =~ 'releases'"
     task:
       jobs:
         - name: Deploy to k8s job

@@ -15,25 +15,25 @@ auto_cancel:
     when: "branch =~ 'releases'"
 
 blocks:
-  - name: Deploy Production
+  - name: 🚀 Deploy to Production
     dependencies: []
     task:
       jobs:
-        - name: Deploy production
+        - name: 🚀 Deploy to Production
           commands:
             - echo 'Deploying production'
             - checkout
             - myke deploy
-  - name: Deploy Staging
+  - name: 🚀 Deploy to Staging
     dependencies: []
     task:
       jobs:
-        - name: Deploy staging
+        - name: 🚀 Deploy to Staging
           commands:
             - echo 'Deploying staging'
             - checkout
             - myke deploy
 
 promotions:
-  - name: Demo deploy
-    pipeline_file: deploy.yml
+  - name: 🚀 Deploy to Demo
+    pipeline_file: deploy-demo.yml
