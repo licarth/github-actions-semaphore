@@ -1,6 +1,6 @@
 version: v1.0
 
-name: Deployment
+name: 🚀 Deploy Staging & Production
 
 agent:
   machine:
@@ -19,7 +19,7 @@ blocks:
     dependencies: []
     task:
       jobs:
-        - name: 🚀 Deploy to Production
+        - name: myke deploy
           commands:
             - echo 'Deploying production'
             - checkout
@@ -28,7 +28,7 @@ blocks:
     dependencies: []
     task:
       jobs:
-        - name: 🚀 Deploy to Staging
+        - name: myke deploy
           commands:
             - echo 'Deploying staging'
             - checkout
