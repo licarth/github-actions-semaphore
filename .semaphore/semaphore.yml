@@ -12,12 +12,12 @@ agent:
 
 auto_cancel:
   queued:
-    when: "tag =~ '^deployment-.*'"
+    when: "branch =~ 'main'"
 
 blocks:
   - name: Deploy to k8s block
     run:
-      when: "tag =~ '^deployment-.*'"
+      when: "branch =~ 'main'"
     task:
       jobs:
         - name: Deploy to k8s job
