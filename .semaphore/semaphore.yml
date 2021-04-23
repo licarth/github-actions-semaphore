@@ -13,6 +13,9 @@ auto_cancel:
 
 blocks:
   - name: Deploy
+    auto_cancel:
+      queued:
+        when: "branch =~ 'production'"
     run:
       when: "branch =~ 'production'"
     task:
