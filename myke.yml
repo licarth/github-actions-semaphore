@@ -5,3 +5,6 @@ tasks:
   build:
     cmd: |-
       echo "This is a fake build task"
+  deploy:
+    cmd: |-
+      echo "This is a fake deployment task"
