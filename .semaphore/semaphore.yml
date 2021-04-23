@@ -22,4 +22,5 @@ blocks:
       jobs:
         - name: Deploy to k8s job
           commands:
+            - checkout
             - myke deploy
