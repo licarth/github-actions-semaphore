@@ -10,8 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Build application
-        uses: ./.github/actions/build
+      # - name: Build application
+      #   uses: ./.github/actions/build
       - name: Push to production for deployment
         uses: ad-m/github-push-action@master
         with:
