@@ -1,0 +1,6 @@
+name: Build
+description: 'Builds the application'
+runs:
+  using: 'docker'
+  image: 'docker://eu.gcr.io/inato-gcr-public/ci:latest'
+  entrypoint: '.github/actions/build/entrypoint.sh'

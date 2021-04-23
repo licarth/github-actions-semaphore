@@ -1,0 +1,7 @@
+---
+project: application
+
+tasks:
+  build:
+    cmd: |-
+      echo "This is a fake build task"
