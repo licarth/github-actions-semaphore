@@ -1,6 +1,6 @@
 version: v1.0
 
-name: Deployment
+name: 🚀 Deploy to Demo
 
 agent:
   machine:
@@ -11,9 +11,9 @@ agent:
       image: 'eu.gcr.io/inato-gcr-public/ci:latest'
 
 blocks:
-  - name: Deploy to k8s block
+  - name: Deploy to demo
     run:
-      when: "branch =~ 'production'"
+      when: "branch =~ 'releases'"
     task:
       jobs:
         - name: Deploy to k8s job

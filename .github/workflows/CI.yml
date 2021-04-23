@@ -24,4 +24,4 @@ jobs:
         continue-on-error: true
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: "production"
+          branch: "releases"

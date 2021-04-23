@@ -12,13 +12,13 @@ agent:
 
 auto_cancel:
   queued:
-    when: "branch =~ 'production'"
+    when: "branch =~ 'releases'"
 
 blocks:
   - name: Deploy Production
     dependencies: []
     run:
-      when: "branch =~ 'production'"
+      when: "branch =~ 'releases'"
     task:
       jobs:
         - name: Deploy production
