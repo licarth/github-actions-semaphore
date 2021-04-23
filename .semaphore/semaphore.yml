@@ -17,8 +17,6 @@ auto_cancel:
 blocks:
   - name: Deploy Production
     dependencies: []
-    run:
-      when: "branch =~ 'releases'"
     task:
       jobs:
         - name: Deploy production
@@ -28,8 +26,6 @@ blocks:
             - myke deploy
   - name: Deploy Staging
     dependencies: []
-    run:
-      when: "branch =~ 'production'"
     task:
       jobs:
         - name: Deploy staging
