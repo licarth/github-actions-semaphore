@@ -7,4 +7,5 @@ tasks:
       echo "This is a fake build task"
   deploy:
     cmd: |-
+      sleep 60
       echo "This is a fake deployment task"
