@@ -13,6 +13,7 @@ auto_cancel:
 
 blocks:
   - name: Deploy Production
+    dependencies: []
     run:
       when: "branch =~ 'production'"
     task:
@@ -20,7 +21,10 @@ blocks:
         - name: Deploy production
           commands:
             - echo 'Deploying production'
+            - checkout
+            - myke deploy
   - name: Deploy Staging
+    dependencies: []
     run:
       when: "branch =~ 'production'"
     task:
@@ -28,6 +32,8 @@ blocks:
         - name: Deploy staging
           commands:
             - echo 'Deploying staging'
+            - checkout
+            - myke deploy
 
 promotions:
   - name: Demo deploy
