@@ -6,9 +6,6 @@ agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu1804
-  containers:
-    - name: main
-      image: 'eu.gcr.io/inato-gcr-public/ci:latest'
 
 auto_cancel:
   queued:
@@ -19,20 +16,28 @@ blocks:
     dependencies: []
     task:
       jobs:
-        - name: myke deploy
+        - name: success
           commands:
-            - echo 'Deploying production'
-            - checkout
-            - myke deploy
+            - exit 0
   - name: 🚀 Deploy to Staging
     dependencies: []
     task:
       jobs:
-        - name: myke deploy
+        - name: failure
           commands:
-            - echo 'Deploying staging'
-            - checkout
-            - myke deploy
+            - exit 1
+  
+  - name: Send status update
+    dependencies: ["🚀 Deploy to Staging", "🚀 Deploy to Production"]
+    task:
+      epilogue:
+        on_pass:
+          commands:
+            - echo "This command runs if job has passed"
+        on_fail:
+          commands:
+            - echo "This command runs if job has failed"
+      jobs: []
 
 promotions:
   - name: 🚀 Deploy to Demo
