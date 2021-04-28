@@ -15,9 +15,10 @@ blocks:
   - name: 🚀 Deploy to Production
     dependencies: []
     task:
-      # epilogue:
-      #   on_fail:
-
+      epilogue:
+        on_fail:
+          commands:
+            - echo "Reporting failure"
       jobs:
         - name: success
           commands:
@@ -25,6 +26,10 @@ blocks:
   - name: 🚀 Deploy to Staging
     dependencies: []
     task:
+      epilogue:
+        on_fail:
+          commands:
+            - echo "Reporting failure"
       jobs:
         - name: failure
           commands:
@@ -32,19 +37,11 @@ blocks:
   
   - name: Send status update
     dependencies: ["🚀 Deploy to Staging", "🚀 Deploy to Production"]
-    run: 
-      when: "true"
     task:
-      epilogue:
-        on_pass:
-          commands:
-            - echo "This command runs if job has passed"
-        on_fail:
-          commands:
-            - echo "This command runs if job has failed"
       jobs:
         - name: empty
-          commands: []
+          commands:
+            - echo "Reporting success"
 
 promotions:
   - name: 🚀 Deploy to Demo
