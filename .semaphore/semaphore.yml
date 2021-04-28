@@ -21,8 +21,8 @@ blocks:
             - env_var: ENV
               values: [ "staging", "production" ]
           commands:
-            - echo "$ENV_deployment_id" >> "github_$ENV_deployment_id.txt"
-            - artifact push workflow "github_$ENV_deployment_id.txt"
+            - echo "$ENV_deployment_id" > github_${ENV}_deployment_id.txt"
+            - artifact push workflow "github_${ENV}_deployment_id.txt"
   - name: 🚀 Deploy to Production
     dependencies: ["Pre-Deploy"]
     task:
