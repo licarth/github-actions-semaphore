@@ -31,9 +31,9 @@ blocks:
           commands:
             - echo "Reporting failure"
       jobs:
-        - name: failure
+        - name: success
           commands:
-            - exit 1
+            - echo "Success"
   
   - name: Send status update
     dependencies: ["🚀 Deploy to Staging", "🚀 Deploy to Production"]
