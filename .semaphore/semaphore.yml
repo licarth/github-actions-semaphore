@@ -12,18 +12,17 @@ auto_cancel:
     when: "branch =~ 'releases'"
 
 blocks:
-  
-
-  - name: Announce Deployments to Github
+  - name: Pre-Deploy
     dependencies: []
     task:
       jobs:
-        - name: success
+        - name: 🔔 Report deployment to GitHub
+          matrix:
+            - env_var: ENV
+              values: [ "staging", "production" ]
           commands:
-            - echo "staging_deployment_id" >> github_staging_deployment_id.txt
-            - echo "production_deployment_id" >> github_production_deployment_id.txt
-            - artifact push workflow github_staging_deployment_id.txt
-            - artifact push workflow github_production_deployment_id.txt
+            - echo "$ENV_deployment_id" >> github_staging_deployment_id.txt
+            - artifact push workflow github_$ENV_deployment_id.txt
   - name: 🚀 Deploy to Production
     dependencies: ["Announce Deployments to Github"]
     task:
@@ -49,7 +48,7 @@ blocks:
         - name: error
           commands:
             - echo "Fail"
-            - myke
+            # - myke
   
   - name: Send status update
     dependencies: ["🚀 Deploy to Staging", "🚀 Deploy to Production"]
