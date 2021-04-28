@@ -18,7 +18,7 @@ blocks:
       jobs:
         - name: success
           commands:
-            - exit 0
+            - echo "Yay"
   - name: 🚀 Deploy to Staging
     dependencies: []
     task:
