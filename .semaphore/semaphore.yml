@@ -49,7 +49,7 @@ blocks:
         - name: error
           commands:
             - echo "Fail"
-            # - myke
+            - myke
   
   - name: Send status update
     dependencies: ["🚀 Deploy to Staging", "🚀 Deploy to Production"]
