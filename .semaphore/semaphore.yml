@@ -50,7 +50,7 @@ blocks:
           commands:
             - artifact pull workflow github_staging_deployment_id.txt
             - echo "Fail"
-            - exit 1
+            - myke
   
   - name: Send status update
     dependencies: ["🚀 Deploy to Staging", "🚀 Deploy to Production"]
