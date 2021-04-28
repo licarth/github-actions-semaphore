@@ -42,6 +42,7 @@ blocks:
       epilogue:
         on_fail:
           commands:
+            - ls -lh
             - id=$(cat github_staging_deployment_id.txt)
             - echo "reporting error for $id"
       jobs:
