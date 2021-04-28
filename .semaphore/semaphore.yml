@@ -24,7 +24,7 @@ blocks:
             - echo "$ENV_deployment_id" >> github_staging_deployment_id.txt
             - artifact push workflow github_$ENV_deployment_id.txt
   - name: 🚀 Deploy to Production
-    dependencies: ["Announce Deployments to Github"]
+    dependencies: ["Pre-Deploy"]
     task:
       epilogue:
         on_fail:
@@ -36,7 +36,7 @@ blocks:
           commands:
             - echo "Yay"
   - name: 🚀 Deploy to Staging
-    dependencies: ["Announce Deployments to Github"]
+    dependencies: ["Pre-Deploy"]
     task:
       epilogue:
         on_fail:
