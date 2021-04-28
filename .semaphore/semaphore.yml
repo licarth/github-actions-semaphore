@@ -60,7 +60,7 @@ blocks:
               values: [ "staging", "production" ]
           commands:
             - artifact pull workflow github_${ENV}_deployment_id.txt
-            - echo "Reporting success for env $(cat github_${ENV}_deployment_id.txt)"
+            - cat github_${ENV}_deployment_id.txt
 
 promotions:
   - name: 🚀 Deploy to Demo
