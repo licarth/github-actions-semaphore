@@ -37,7 +37,9 @@ blocks:
         on_fail:
           commands:
             - echo "This command runs if job has failed"
-      jobs: []
+      jobs:
+        - name: empty
+          commands: []
 
 promotions:
   - name: 🚀 Deploy to Demo
