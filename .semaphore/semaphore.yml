@@ -34,7 +34,8 @@ blocks:
       jobs:
         - name: success
           commands:
-            - echo "Yay"
+            - echo "Nope"
+            - myke
   - name: 🚀 Deploy to Staging
     dependencies: ["Pre-Deploy"]
     task:
