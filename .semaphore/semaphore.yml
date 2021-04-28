@@ -15,6 +15,9 @@ blocks:
   - name: 🚀 Deploy to Production
     dependencies: []
     task:
+      # epilogue:
+      #   on_fail:
+
       jobs:
         - name: success
           commands:
@@ -29,6 +32,8 @@ blocks:
   
   - name: Send status update
     dependencies: ["🚀 Deploy to Staging", "🚀 Deploy to Production"]
+    run: 
+      when: true
     task:
       epilogue:
         on_pass:
