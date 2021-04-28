@@ -42,12 +42,12 @@ blocks:
       epilogue:
         on_fail:
           commands:
-            - artifact pull workflow github_staging_deployment_id.txt
             - id=$(cat github_staging_deployment_id.txt)
             - echo "reporting error for $id"
       jobs:
         - name: error
           commands:
+            - artifact pull workflow github_staging_deployment_id.txt
             - echo "Fail"
             - exit 1
   
