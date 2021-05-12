@@ -16,4 +16,6 @@ jobs:
       - name: Push to production for deployment
         run: ./tools/install-myke.sh
       - name: Push to production for deployment
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: myke mark_ci_ready
