@@ -7,7 +7,7 @@ jobs:
     steps:
       - checkout
       - run:
-          command: ./tools/install_myke.sh
+          command: ./tools/install-myke.sh
       - run:
           command: myke mark_ci_ready
 
