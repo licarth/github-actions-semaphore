@@ -1,9 +1,9 @@
 #! /bin/bash
 
 # Bash arrays : get stdout, stderr and exitcode altogether.
+remote_repo="https://ci:${GITHUB_TOKEN}@github.com/licarth/github-actions-semaphore.git"
 
-
-FIRST_CI_PUSH_STDOUT=`git push origin main:first-ci-passed --porcelain 2>&1`
+FIRST_CI_PUSH_STDOUT=`git push "${remote_repo}" HEAD:first-ci-passed --porcelain 2>&1`
 FIRST_CI_PUSH_STATUS=$?
 echo "==> command exit code: $FIRST_CI_PUSH_STDOUT"
 echo $FIRST_CI_PUSH_STATUS
@@ -12,7 +12,7 @@ if [ $FIRST_CI_PUSH_STATUS -eq 0 ]; then
   if [[ "$FIRST_CI_PUSH_STDOUT" == *'[up to date]'* ]]; then
     # Other CI already passed
     echo '==> The other CI already pushed, carrying with a push to releases...'
-    RELEASES_PUSH_STDOUT=$(git push origin main:releases --porcelain 2>1)
+    RELEASES_PUSH_STDOUT=$(git push "${remote_repo}" HEAD:releases --porcelain 2>&1)
     RELEASES_PUSH_STATUS=$?
     echo $RELEASES_PUSH_STDOUT
     echo "==> command exit code: $RELEASES_PUSH_STATUS"
