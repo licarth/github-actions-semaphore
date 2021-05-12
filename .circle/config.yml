@@ -1,0 +1,22 @@
+version: 2.1
+
+jobs:
+  finalize_workflow:
+    executor:
+      docker:
+        - image: node:14
+    steps:
+      - checkout
+      - run:
+          command: bash push.sh
+
+workflows:
+  version: 2
+  ci_cd:
+    jobs:
+      - finalize_workflow:
+          filters:
+            branches:
+              ignore:
+                - master
+
