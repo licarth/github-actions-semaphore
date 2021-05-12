@@ -7,7 +7,9 @@ jobs:
     steps:
       - checkout
       - run:
-          command: bash push.sh
+          command: ./tools/install_myke.sh
+      - run:
+          command: myke mark_ci_ready
 
 workflows:
   version: 2

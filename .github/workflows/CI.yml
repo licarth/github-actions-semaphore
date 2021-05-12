@@ -13,15 +13,7 @@ jobs:
         with:
           persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
           fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
-      # - name: Build application
-      #   shell: bash
-      #   run: |
-      #     export A=$[ ( $RANDOM % 60 )  + 1 ]
-      #     echo "sleeping for $A second(s)"
-      #     sleep $A
       - name: Push to production for deployment
-        uses: ad-m/github-push-action@master
-        continue-on-error: true
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: "releases"
+        command: ./tools/install_myke.sh
+      - name: Push to production for deployment
+        command: myke mark_ci_ready

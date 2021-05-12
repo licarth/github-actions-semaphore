@@ -9,3 +9,6 @@ tasks:
     cmd: |-
       sleep 60
       echo "This is a fake deployment task"
+  mark_ci_ready:
+    shell: bash
+    cmd: ./mark_ci_ready.sh
