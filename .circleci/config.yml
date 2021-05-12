@@ -2,9 +2,8 @@ version: 2.1
 
 jobs:
   finalize_workflow:
-    executor:
-      docker:
-        - image: node:14
+    docker:
+      - image: node:14
     steps:
       - checkout
       - run:
