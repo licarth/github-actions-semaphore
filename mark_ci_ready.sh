@@ -1,7 +1,7 @@
 #! /bin/bash
 
 # Bash arrays : get stdout, stderr and exitcode altogether.
-remote_repo="https://ci:${GITHUB_TOKEN}@github.com/licarth/github-actions-semaphore.git"
+remote_repo="https://${GITHUB_ACTOR:ci}:${GITHUB_TOKEN}@github.com/licarth/github-actions-semaphore.git"
 
 FIRST_CI_PUSH_STDOUT=`git push "${remote_repo}" HEAD:first-ci-passed --porcelain 2>&1`
 FIRST_CI_PUSH_STATUS=$?
