@@ -20,8 +20,13 @@ if [ $FIRST_CI_PUSH_STATUS -eq 0 ]; then
       echo '==> Successfully pushed to releases'
       exit 0;
     else
-      echo '==> Could not push to "releases" branch, probably because CI ran faster on a more recent commit.'
-      exit 0;
+      if [[ "$FIRST_CI_PUSH_STDOUT" == *'[rejected] (non-fast-forward)'* ]]; then
+        echo '==> Could not push to "releases" branch, probably because CI ran faster on a more recent commit.'
+        exit 0;
+      else
+        echo '==> Unknown error!'
+        exit 1;
+      fi
     fi
   else
     # Success, do nothing, the other CI will push to releases.
@@ -29,9 +34,13 @@ if [ $FIRST_CI_PUSH_STATUS -eq 0 ]; then
     exit 0;
   fi
 else
-  # Error, cannot push, means another branch was faster at pushing, fail silently.
-  echo '==> Could not push to "first-ci-passed" branch, probably because CI ran faster on a more recent commit.'
-  exit 0;
+  if [[ "$FIRST_CI_PUSH_STDOUT" == *'[rejected] (non-fast-forward)'* ]]; then
+    echo '==> Could not push to "first-ci-passed" branch, probably because CI ran faster on a more recent commit.'
+    exit 0;
+  else
+    echo '==> Unknown error!'
+    exit 1;
+  fi
 fi
 
 
