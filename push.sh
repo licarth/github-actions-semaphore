@@ -17,8 +17,11 @@ if [ $FIRST_CI_PUSH_STATUS -eq 0 ]; then
     echo $RELEASES_PUSH_STDOUT
     echo "==> command exit code: $RELEASES_PUSH_STATUS"
     if  [ $RELEASES_PUSH_STATUS -eq 0 ]; then
-      echo '==> Successfully pushed to releases'
-      exit 0;
+        echo '==> Successfully pushed to releases'
+      if [[ "$FIRST_CI_PUSH_STDOUT" == *'[up to date]'* ]]; then
+        echo '==> WARNING: No deployment will get triggered! releases branch was already up-to-date.'
+      fi
+        exit 0;
     else
       if [[ "$FIRST_CI_PUSH_STDOUT" == *'[rejected] (non-fast-forward)'* ]]; then
         echo '==> Could not push to "releases" branch, probably because CI ran faster on a more recent commit.'
