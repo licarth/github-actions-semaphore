@@ -7,6 +7,11 @@ agent:
     type: e1-standard-2
     os_image: ubuntu1804
 
+queue:
+  processing: serialized
+  name: single-queue
+  scope: project
+
 auto_cancel:
   queued:
     when: "true"
@@ -19,7 +24,7 @@ blocks:
         - name: 🔔 Report deployment to GitHub
           matrix:
             - env_var: ENV
-              values: [ "staging", "production" ]
+              values: ["staging", "production"]
           commands:
             - echo "${ENV}_deployment_id" >> github_${ENV}_deployment_id.txt
             - artifact push workflow github_${ENV}_deployment_id.txt
@@ -50,7 +55,7 @@ blocks:
           commands:
             - echo "Fail"
             - myke
-  
+
   - name: Send status update
     dependencies: ["🚀 Deploy to Staging", "🚀 Deploy to Production"]
     task:
@@ -58,7 +63,7 @@ blocks:
         - name: empty
           matrix:
             - env_var: ENV
-              values: [ "staging", "production" ]
+              values: ["staging", "production"]
           commands:
             - artifact pull workflow github_${ENV}_deployment_id.txt
             - cat github_${ENV}_deployment_id.txt
