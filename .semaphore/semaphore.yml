@@ -9,7 +9,7 @@ agent:
 
 auto_cancel:
   queued:
-    when: "branch =~ 'releases'"
+    when: true
 
 blocks:
   - name: Pre-Deploy
