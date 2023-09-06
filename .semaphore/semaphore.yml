@@ -9,7 +9,7 @@ agent:
 
 auto_cancel:
   queued:
-    when: true
+    when: "true"
 
 blocks:
   - name: Pre-Deploy
